@@ -18,9 +18,12 @@ public class Main extends Application {
     GridPane pane;
     TextArea txfInput, txfOutput;
     Button btnExport, btnImport;
+    Encrypter en;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        en = new Encrypter();
+
         root = new Pane();
         pane = new GridPane();
         pane.setVgap(5);
@@ -32,6 +35,12 @@ public class Main extends Application {
         txfOutput.setPromptText("Output");
         btnExport = new Button("Export");
         btnImport = new Button("Import");
+
+        txfInput.setOnKeyTyped(
+            e -> {
+                txfOutput.setText(en.encryptText(txfInput.getText()));
+            }
+        );
         pane.add(txfInput, 0, 0, 2, 1);
         pane.add(txfOutput, 0, 1, 2, 1);
         pane.add(btnExport, 0, 2);
