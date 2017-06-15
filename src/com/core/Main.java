@@ -9,14 +9,13 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-    Pane root;
-    GridPane pane;
-    TextArea txfInput, txfOutput;
-    Button btnExport, btnImport;
-    RadioButton rdEncrypt, rdDecrypt;
-    final ToggleGroup group = new ToggleGroup();
-
-    Encrypter en;
+   private  Pane root;
+    private GridPane pane;
+    private TextArea txfInput, txfOutput;
+    private Button btnExport, btnImport;
+    private RadioButton rdEncrypt, rdDecrypt;
+    private final ToggleGroup group = new ToggleGroup();
+    private Encrypter en;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -47,6 +46,7 @@ public class Main extends Application {
                 }else if(group.getSelectedToggle() == rdDecrypt){
                     txfOutput.setText(en.decryptText(txfInput.getText()));
                 }
+                e.consume();
             }
         );
         pane.add(txfInput, 0, 0, 2, 2);
