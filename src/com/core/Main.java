@@ -40,9 +40,8 @@ public class Main extends Application {
         btnImport = new Button("Import");
 
         //TODO: Update Text before Encryption
-        txfInput.setOnKeyPressed(
+        txfInput.setOnKeyTyped(
             e -> {
-                txfOutput.setText(txfInput.getText());
                 if(group.getSelectedToggle() == rdEncrypt){
                     txfOutput.setText(en.encryptText(txfInput.getText()));
                 }else if(group.getSelectedToggle() == rdDecrypt){

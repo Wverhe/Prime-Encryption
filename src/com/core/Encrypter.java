@@ -14,7 +14,7 @@ public class Encrypter {
         String ciphertext = "";
         String[] words = plaintext.split(" ");
         for(int i = 0; i < words.length; i++){
-            ciphertext += encryptWord(words[i]);
+            ciphertext += encryptWord(words[i] + " ");
         }
         return ciphertext;
     }
@@ -28,9 +28,7 @@ public class Encrypter {
                 return "";
             }
             int tempByte = letters[i].getBytes()[0];
-            System.out.println("Byte: " + tempByte);
             String tempBinary = Integer.toBinaryString(tempByte);
-            System.out.println("Binary Encrypt: " + tempBinary);
             for(int j = 0; j < tempBinary.length(); j++){
                 if(tempBinary.substring(j, j + 1).equals("1")){
                     ciphertext += primes[(int) (Math.random() * primes.length)] + " ";
@@ -51,7 +49,7 @@ public class Encrypter {
         String plaintext = "";
         String[] letters = ciphertext.split("\n");
         for(int i = 0; i < letters.length; i++){
-            plaintext = plaintext + decryptLetter(letters[i]) + " ";
+            plaintext = plaintext + decryptLetter(letters[i]);
         }
         return plaintext;
     }
