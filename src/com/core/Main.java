@@ -40,7 +40,7 @@ public class Main extends Application {
         btnImport = new Button("Import");
 
         //TODO: Update Text before Encryption
-        txfInput.setOnKeyTyped(
+        txfInput.setOnKeyReleased(
             e -> {
                 if(group.getSelectedToggle() == rdEncrypt){
                     txfOutput.setText(en.encryptText(txfInput.getText()));

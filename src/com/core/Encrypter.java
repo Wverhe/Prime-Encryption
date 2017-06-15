@@ -14,7 +14,12 @@ public class Encrypter {
         String ciphertext = "";
         String[] words = plaintext.split(" ");
         for(int i = 0; i < words.length; i++){
-            ciphertext += encryptWord(words[i] + " ");
+            if(i + 1 == words.length){
+                ciphertext += encryptWord(words[i]);
+            }else{
+                ciphertext += encryptWord(words[i] + " ");
+            }
+
         }
         return ciphertext;
     }
@@ -64,7 +69,6 @@ public class Encrypter {
             if(Arrays.asList(primes).contains(myByte)){
                 binary += "1";
             }else if(!Arrays.asList(primes).contains(myByte)){
-                System.out.println("Non Prime: " + bytes[i]);
                 binary += "0";
             }
         }
