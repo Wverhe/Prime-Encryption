@@ -1,14 +1,9 @@
-package sample;
+package com.core;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -18,6 +13,9 @@ public class Main extends Application {
     GridPane pane;
     TextArea txfInput, txfOutput;
     Button btnExport, btnImport;
+    RadioButton rdEncrypt, rdDecrypt;
+    final ToggleGroup group = new ToggleGroup();
+
     Encrypter en;
 
     @Override
@@ -33,21 +31,34 @@ public class Main extends Application {
         txfInput.setPromptText("Input");
         txfOutput = new TextArea();
         txfOutput.setPromptText("Output");
+        rdEncrypt = new RadioButton("Encrypt");
+        rdEncrypt.fire();
+        rdDecrypt = new RadioButton("Decrypt");
+        rdEncrypt.setToggleGroup(group);
+        rdDecrypt.setToggleGroup(group);
         btnExport = new Button("Export");
         btnImport = new Button("Import");
 
-        txfInput.setOnKeyTyped(
+        //TODO: Update Text before Encryption
+        txfInput.setOnKeyPressed(
             e -> {
-                txfOutput.setText(en.encryptText(txfInput.getText()));
+                txfOutput.setText(txfInput.getText());
+                if(group.getSelectedToggle() == rdEncrypt){
+                    txfOutput.setText(en.encryptText(txfInput.getText()));
+                }else if(group.getSelectedToggle() == rdDecrypt){
+                    txfOutput.setText(en.decryptText(txfInput.getText()));
+                }
             }
         );
-        pane.add(txfInput, 0, 0, 2, 1);
-        pane.add(txfOutput, 0, 1, 2, 1);
-        pane.add(btnExport, 0, 2);
-        pane.add(btnImport, 1, 2);
+        pane.add(txfInput, 0, 0, 2, 2);
+        pane.add(rdEncrypt, 2, 0);
+        pane.add(rdDecrypt, 2, 1);
+        pane.add(txfOutput, 0, 2, 2, 2);
+        pane.add(btnExport, 0, 4);
+        pane.add(btnImport, 1, 4);
         root.getChildren().add(pane);
         primaryStage.setTitle("Prime Encryption");
-        primaryStage.setScene(new Scene(root, 500, 500));
+        primaryStage.setScene(new Scene(root, 575, 500));
         primaryStage.show();
     }
 
