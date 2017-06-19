@@ -39,7 +39,7 @@ public class Encrypter {
                 } else {
                     int tempNum;
                     do {
-                        tempNum = (int) (Math.random() * 100);
+                        tempNum = (int)(Math.random() * 100);
                     } while (Arrays.asList(primes).contains(tempNum));
                     ciphertext.append(tempNum).append(" ");
                 }
